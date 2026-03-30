@@ -1,0 +1,6 @@
+# Copy to `selected_facility.yaml` and set your chosen system after running
+# `python -m scripts.compare_pvdaq_facilities`.
+
+system_id: null
+public_name: ""
+notes: ""
