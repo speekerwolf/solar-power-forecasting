@@ -1,6 +1,6 @@
 ---
 description: Copied verbatim from awesome-cursorrules rules/git-conventional-commit-messages/.cursorrules
-globs: "**/*.md"
+globs: "**/*.md\n**/.github/**/*.{yml,yaml}"
 alwaysApply: false
 ---
 Use the Conventional Commit Messages specification to generate commit messages

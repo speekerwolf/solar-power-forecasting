@@ -1,0 +1,30 @@
+---
+description: Branch protection workflow (feature branches + PRs; no direct commits to main)
+alwaysApply: true
+---
+
+# Branch protection + pull request workflow
+
+This repo has branch protection on `main`. Follow these rules whenever making changes.
+
+## Always work on a branch (never directly on main)
+- Do not commit directly to `main`.
+- Create a feature branch from `main` for every change.
+- Use short, descriptive branch names, e.g. `feat/nsrdb-client`, `chore/repo-structure`, `fix/timezone-join`.
+
+## Commit discipline
+- Use Conventional Commits (e.g. `feat: ...`, `fix: ...`, `docs: ...`, `chore: ...`).
+- Keep commits focused and small enough to review.
+
+## Pull request requirements
+- Open a PR from your feature branch into `main`.
+- PR description must include:
+  - what changed and why (1–3 bullets)
+  - how to run/verify (test plan)
+  - any risks or follow-ups
+- If checks are present (lint/tests), they must pass before merging.
+
+## Merge strategy
+- Prefer squash-merge for a clean history unless there’s a reason to preserve commit structure.
+- Delete the feature branch after merge.
+

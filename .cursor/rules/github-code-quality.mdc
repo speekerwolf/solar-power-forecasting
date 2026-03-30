@@ -1,6 +1,6 @@
 ---
 description: Copied verbatim from awesome-cursorrules rules/github-code-quality-cursorrules-prompt-file/.cursorrules
-globs: "**/*.md"
+globs: "**/*.md\n**/.github/**/*.{yml,yaml}"
 alwaysApply: false
 ---
 {
