@@ -1,0 +1,38 @@
+---
+description: Time-series forecasting splits and leakage prevention checklist
+globs: **/*.{py,ipynb}
+alwaysApply: false
+---
+
+# Time-Series Forecasting Splits (Leakage Prevention)
+
+When building solar forecasting models (PVDAQ + NSRDB), follow this checklist before training and evaluation.
+
+## 1) Define the forecasting setup up front
+- Specify the prediction target (PV output), forecast horizon(s), and the time granularity (e.g., 15-min, hourly).
+- Clearly define the time index column and timezone; keep timezone handling consistent end-to-end.
+- Record the data coverage window (start/end timestamps) and any filtering rules applied.
+
+## 2) Use time-aware validation (no shuffling)
+- Use expanding window or rolling window splits for time-series forecasting.
+- Ensure each validation/test period happens strictly after the corresponding training period.
+- Do not shuffle rows; if you resample, resample consistently before splitting.
+
+## 3) Prevent leakage in feature engineering
+- Treat the training portion as the only source of information for any “fit”/aggregation step.
+- Never compute rolling statistics, normalization parameters, imputations, or joins using future (validation/test) timestamps.
+- When joining PVDAQ and NSRDB features:
+  - align timestamps first (same timezone and resolution),
+  - then validate overlap coverage for train vs validation/test,
+  - and record how many rows are dropped due to missing alignment.
+
+## 4) Evaluation protocol
+- Evaluate with MAE, RMSE, and R2, reported consistently for each model and split.
+- Include residual checks:
+  - residuals vs time-of-day/season,
+  - residual magnitude across clear vs cloudy regimes when you can identify them.
+
+## 5) Reproducibility notes (important for portfolio notebooks)
+- Log split boundaries (train/val/test start/end timestamps) in the notebook markdown.
+- Keep split logic in a small reusable helper function so results are repeatable.
+

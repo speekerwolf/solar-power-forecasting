@@ -1,0 +1,35 @@
+---
+description: NSRDB API and PVDAQ tabular data — Python REST, caching, and time-aligned joins
+globs: **/*.{py,ipynb}
+alwaysApply: false
+---
+
+# NSRDB and PVDAQ data access
+
+Use this project’s stack: Python, `pandas`, HTTP to NREL NSRDB-style APIs (e.g. `requests`), and PVDAQ as file-based tabular data.
+
+## PVDAQ (plant output files)
+
+- Treat downloaded files as immutable raw inputs; copy or load into DataFrames without overwriting source files.
+- Document facility id, date range, and file path in notebook markdown or a small config module.
+- Parse timestamps explicitly; state timezone (UTC vs local) and keep it consistent through the pipeline.
+- At load time: inspect dtypes, missingness, duplicates on time index, and obvious outliers; summarize in markdown before cleaning.
+
+## NSRDB (API)
+
+- Centralize HTTP calls in one module or helper: base URL, query parameters, and parsing in one place.
+- Load API keys and secrets from environment variables (never commit keys). Document required env vars in README or `.env.example`.
+- Use explicit `timeout` on every request; retry transient failures with bounded exponential backoff.
+- Cache successful JSON/CSV responses to disk under a dedicated cache directory with deterministic filenames (e.g. hash or facility + date range + attributes).
+- Log minimally: request id, status code, row count, and cache hit or miss (no secrets in logs).
+
+## Joining PVDAQ and NSRDB
+
+- Align on a common time basis before merging (same timezone, same or resampled frequency). Document resampling rules.
+- After merge: report row counts before/after, fraction of missing keys, and time coverage overlap.
+- Validate joins with spot checks (known sunny vs cloudy windows) when possible.
+
+## Reproducibility
+
+- Prefer functions that take explicit date ranges and paths so notebooks stay rerunnable.
+- If randomness appears (sampling, train split), set seeds and note them in the notebook.
