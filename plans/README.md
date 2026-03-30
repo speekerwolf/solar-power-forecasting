@@ -7,8 +7,14 @@ Save **project planning documents** here (implementation plans, milestones, deci
 - Markdown exports or copies of planning docs you want versioned with the repo
 - Short notes on scope, open questions, and next steps for each phase
 
-## Cursor IDE plans
+## Cursor IDE vs this repo
 
-If you generate plans in Cursor, copy or export them into this folder (for example `plans/YYYY-MM-topic.md`) so they live with the codebase and PR history.
+Cursor keeps its own Planning Mode plans on your machine (for example under your user `.cursor/plans/`). Those files are **not** automatically part of git.
 
-The global Cursor plans directory on your machine is separate; this `plans/` folder is the **project’s canonical** place for saved plans.
+This `plans/` directory is the **versioned** copy: anything you want in PR history, on GitHub, or shared with collaborators should live here.
+
+Use the naming convention from `.cursor/rules/planning-mode-save-plans.mdc`:
+
+`plans/NNN_YYYY-MM-DD_<short-indicative-slug>.md`
+
+After you execute a plan in Cursor, copy or export the final markdown into `plans/` with the next `NNN`.
