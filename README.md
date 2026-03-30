@@ -14,6 +14,7 @@ End-to-end solar PV output forecasting using **NREL PVDAQ** plant data and **NSR
 | `data/raw/` | Downloaded PVDAQ CSVs (gitignored) |
 | `cache/` | API response cache (gitignored) |
 | `config/` | Chosen facility and project config |
+| `plans/` | Saved project planning docs (markdown) |
 | `reports/figures/` | Exported figures for README / deck |
 
 ## Quick start
