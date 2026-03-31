@@ -1,0 +1,31 @@
+---
+description: EDA is exploration-first (learn data, surface patterns, defer solutions to Act 2)
+globs: "**/*.{ipynb,md}"
+alwaysApply: false
+---
+
+# EDA mindset: exploration-first
+
+When working on EDA (especially Act 1 sub-acts), prioritize **understanding** over optimizing.
+
+## Primary goal
+
+- Learn the dataset: schema, units, time index/timezone, cadence, coverage, missingness, known quirks.
+
+## Secondary goal
+
+- Surface **emerging patterns** worth investigating later (seasonality, anomalies, regimes).
+
+## What to produce in EDA
+
+- Clear tables + plots that show what’s true in the data
+- A short **insights recap** at the end of each EDA sub-act:
+  - observations and hypotheses
+  - open questions
+  - risks / data quality caveats
+
+## What NOT to do in EDA
+
+- Don’t lock in modeling decisions or “solutions” (imputation strategy, feature set, target definition) during EDA.
+- It’s fine to list candidate approaches, but **commitments belong to Act 2**.
+

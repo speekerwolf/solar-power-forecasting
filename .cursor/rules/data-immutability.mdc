@@ -1,0 +1,25 @@
+---
+description: Raw data immutability policy (never overwrite files in data/raw)
+globs: **/*.{py,ipynb}
+alwaysApply: false
+---
+
+# Data immutability (raw is read-only)
+
+Treat `data/raw/` as **immutable** source-of-truth. Never edit, overwrite, “fix in place”, or delete original raw files.
+
+## Rules
+- Never modify any file under `data/raw/` (including by writing back a cleaned CSV with the same name).
+- If a raw file has issues, document them and apply cleaning **in code** or write a new artifact elsewhere.
+- All derived artifacts must be written to one of:
+  - `data/interim/` (lightly cleaned, standardized schema, still close to raw)
+  - `data/processed/` (model-ready tables/features)
+  - `reports/figures/` (plots)
+  - `cache/` (API downloads / cached responses)
+- When you must persist a cleaned dataset, write a **new** file with a new name/version and keep the raw untouched.
+
+## Notebook expectation
+- Loading cells should read from `data/raw/`.
+- Cleaning/feature engineering should return new DataFrames (no in-place edits of raw frames).
+- Save outputs to `data/interim/` or `data/processed/` with explicit timestamps/versions when helpful.
+

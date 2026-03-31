@@ -1,0 +1,26 @@
+{
+  "dataset": "pvdaq_daily_aggregate",
+  "system_id": 11797,
+  "raw_input_dir": "E:/coding/Projects/Solar power generation/data/raw/pvdaq/system_id=11797",
+  "raw_files": [
+    "11797_ac_20170119_20171228.csv",
+    "11797_ac_20191228_20191231.csv",
+    "11797_ac_20200101_20201231.csv",
+    "11797_ac_20210101_20211231.csv",
+    "11797_ac_20220101_20221231.csv",
+    "11797_ac_20230101_20231231.csv",
+    "11797_ac_20240101_20241231.csv",
+    "11797_ac_20250101_20250213.csv"
+  ],
+  "output_file": "E:/coding/Projects/Solar power generation/data/interim/pvdaq_11797_daily.csv",
+  "row_count": 2194,
+  "date_min": "2017-01-19",
+  "date_max": "2025-02-13",
+  "columns": [
+    "date",
+    "system_id",
+    "ac_power_inv_21755_daily_max",
+    "ac_power_inv_21755_daily_mean",
+    "ac_energy_inv_21755_daily_sum"
+  ]
+}

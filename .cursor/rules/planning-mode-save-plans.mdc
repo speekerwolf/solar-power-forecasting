@@ -1,0 +1,38 @@
+---
+description: Save Planning Mode plans into plans/ with chronological numbering
+alwaysApply: true
+---
+
+# Planning Mode: save plans to `plans/`
+
+Whenever we finish a Planning Mode plan and begin executing it (implementation work), we MUST first save the plan into the repo under `plans/`.
+
+## Required behavior
+
+- Create (or update) a Markdown file in `plans/` containing the final plan that will be executed.
+- Use an **indicative name** plus a **chronological number** prefix.
+- The plan file must be created/updated **before** code changes begin.
+
+## Filename convention
+
+Use:
+
+`plans/NNN_YYYY-MM-DD_<short-indicative-slug>.md`
+
+Where:
+- `NNN` is a zero-padded, monotonically increasing number (001, 002, …).
+- `YYYY-MM-DD` is today’s date.
+- `<short-indicative-slug>` is a brief kebab-case topic (e.g. `nsrdb-client`, `act1-eda`, `timezone-join`).
+
+## Picking the next number
+
+- Look at existing `plans/NNN_*.md` files.
+- Pick the next `NNN` as `max(existing NNN) + 1`.
+- If none exist yet, start at `001`.
+
+## Minimum plan content
+
+- Goal / success criteria
+- Scope (in/out)
+- Steps to implement
+- Verification / test plan

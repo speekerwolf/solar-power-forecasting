@@ -29,7 +29,15 @@ Thumbs.db
 secrets*.json
 
 # Data and model artifacts (keep processed docs/notebooks tracked)
-data/raw/
+data/raw/*
+!data/raw/README.md
 data/interim/
 cache/
-models/
+/models/
+
+# Generated figures (keep the folder, ignore outputs by default)
+reports/figures/*
+!reports/figures/.gitkeep
+
+# uv
+.python-version
