@@ -90,14 +90,24 @@ def main() -> None:
         "row_count": row_count,
         "date_min": date_min,
         "date_max": date_max,
-        "built_at_utc": datetime.now(timezone.utc).isoformat(),
+        # Keep this deterministic for clean git status; see run logs in terminal instead.
         "columns": fieldnames,
     }
     manifest_path = manifests_dir / f"pvdaq_{system_id}_daily.json"
-    manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    new_text = json.dumps(manifest, indent=2) + "\n"
+    if manifest_path.exists():
+        old_text = manifest_path.read_text(encoding="utf-8")
+        if old_text == new_text:
+            print(f"Manifest unchanged at {manifest_path}")
+        else:
+            manifest_path.write_text(new_text, encoding="utf-8")
+            print(f"Updated manifest at {manifest_path}")
+    else:
+        manifest_path.write_text(new_text, encoding="utf-8")
+        print(f"Wrote manifest at {manifest_path}")
 
     print(f"Wrote {out_path} ({out_path.stat().st_size} bytes)")
-    print(f"Wrote {manifest_path}")
+    print(f"Built at (UTC): {datetime.now(timezone.utc).isoformat()}")
 
 
 if __name__ == "__main__":

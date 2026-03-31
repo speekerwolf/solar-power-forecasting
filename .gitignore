@@ -35,5 +35,9 @@ data/interim/
 cache/
 /models/
 
+# Generated figures (keep the folder, ignore outputs by default)
+reports/figures/*
+!reports/figures/.gitkeep
+
 # uv
 .python-version
