@@ -45,7 +45,12 @@ End-to-end solar PV output forecasting using **NREL PVDAQ** plant data and **NSR
 
    This writes `config/selected_facility.yaml` with the recommended `system_id`.
 
-5. Open Jupyter and start with `notebooks/00_setup.ipynb`, then `01_act1_eda.ipynb`.
+5. Open Jupyter and start with:
+   - `notebooks/00_setup.ipynb`
+   - Act 1 EDA notebooks:
+     - `notebooks/01a_act1_pvdaq_eda.ipynb` (PVDAQ-only)
+     - `notebooks/01b_act1_nsrdb_eda.ipynb` (NSRDB-only)
+     - `notebooks/01c_act1_combined_eda.ipynb` (combined)
 
 ## NSRDB API key
 
