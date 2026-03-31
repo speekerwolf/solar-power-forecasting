@@ -24,8 +24,13 @@ End-to-end solar PV output forecasting using **NREL PVDAQ** plant data and **NSR
    ```powershell
    py -3 -m pip install --user uv
    py -3 -m uv venv
-   .\.venv\Scripts\Activate.ps1
    py -3 -m uv sync
+   ```
+
+   If PowerShell blocks `Activate.ps1` on your machine, you can still run everything via:
+
+   ```powershell
+   .\.venv\Scripts\python -m jupyter notebook
    ```
 
 2. Copy `.env.example` to `.env` and add your **NREL API key** (see below).
