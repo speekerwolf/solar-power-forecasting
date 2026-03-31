@@ -161,3 +161,44 @@ def load_all_raw_csvs(raw_dir: Path | str) -> dict[Any, pd.DataFrame]:
             else:
                 frames[sid] = chunk
     return frames
+
+
+def load_pvdaq_daily_aggregate_dir(
+    directory: Path | str,
+    *,
+    system_id: int | str | None = None,
+) -> pd.DataFrame:
+    """Load PVDAQ *daily aggregate* CSV chunks into a single long dataframe.
+
+    This supports the PVDAQ OEDI CSV exports shaped like:
+
+    - first column is a date index (often with a blank header)
+    - remaining columns are daily aggregates like:
+      ``ac_power_inv_<id>_daily_max``, ``ac_energy_inv_<id>_daily_sum``, ...
+
+    Notes
+    -----
+    - Output is in a canonical long format with columns:
+      ``date`` (datetime64[ns]), ``system_id`` (object), and one column per metric.
+    - This is intended as a *derived* canonical dataset written to ``data/interim``.
+    """
+    directory = Path(directory)
+    paths = sorted(directory.glob("*.csv"))
+    if not paths:
+        raise FileNotFoundError(f"No CSV files found in {directory}")
+
+    frames: list[pd.DataFrame] = []
+    for p in paths:
+        df = pd.read_csv(p, index_col=0)
+        df.index.name = "date"
+        df = df.reset_index()
+        df["date"] = pd.to_datetime(df["date"], errors="coerce")
+        df = df.dropna(subset=["date"])
+        frames.append(df)
+
+    out = pd.concat(frames, ignore_index=True)
+    out = out.drop_duplicates(subset=["date"]).sort_values("date").reset_index(drop=True)
+    if system_id is None:
+        system_id = directory.name.split("=", 1)[-1] if "=" in directory.name else directory.name
+    out.insert(1, "system_id", system_id)
+    return out
