@@ -22,9 +22,10 @@ End-to-end solar PV output forecasting using **NREL PVDAQ** plant data and **NSR
 1. Create a virtual environment and install dependencies:
 
    ```powershell
-   py -3 -m venv .venv
+   py -3 -m pip install --user uv
+   py -3 -m uv venv
    .\.venv\Scripts\Activate.ps1
-   pip install -r requirements.txt
+   py -3 -m uv sync
    ```
 
 2. Copy `.env.example` to `.env` and add your **NREL API key** (see below).
